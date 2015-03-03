@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LESSON 3 HARRY</title>
+    </head>
+    <body>
+        <script type="text/jsx;harmony=true">
+            var MyList = React.createClass({
+				getInitialState: function() {
+				  return {
+				  "currentIndex": 0,
+				  "todos": []};
+			    },
+                "onAddTodoListItem": function (evt) {
+                    evt.preventDefault();
+
+                    this.setState({
+					"currentIndex": this.state.currentIndex + 1,
+					"todos": this.state.todos.concat({"id": this.state.currentIndex + 1, "value":this.refs.myinput.getDOMNode().value})
+					});
+                },
+				"onRemoveTodo": function(todo, evt){
+					evt.preventDefault();
+					this.setState({
+						"todos": this.state.todos.filter(todoTemp => todoTemp.id !== todo.id)
+					});
+				},
+				"onStoreTodoList": function(evt){
+					evt.preventDefault();
+					
+					console.log(this.state.todos);					
+				},
+                "render": function () {
+					var todosItems = this.state.todos.map(todo => {
+                                return <li>{todo.value}
+								<button onClick={this.onRemoveTodo.bind(this, todo)}>X</button>
+								</li>;
+                            });
+                    return <div>
+                        <input ref="myinput" type="text" />
+                        <button onClick={this.onAddTodoListItem}>Click me!</button>
+                        <button onClick={this.onStoreTodoList}>Store!</button>
+                        <ul>
+                            {todosItems}
+                        </ul>
+                    </div>;
+                }
+            });
+
+            React.render(<MyList />, document.body);
+        </script>
+
+        <script src="/bower_components/react/react-with-addons.js"></script>
+        <script src="/bower_components/react/JSXTransformer.js"></script>
+    </body>
+</html>
