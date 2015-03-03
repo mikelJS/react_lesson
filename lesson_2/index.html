@@ -1,71 +1,82 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>LESSON 2</title>
-
-  </head>
-  <body>
-   
-   <div id="content"></div>
-	
-	<script type="text/jsx">
-		var CommentBox = React.createClass({
-		  render: function() {
-			return (
-			  <div className="commentBox">
-				Hello, world! I am a CommentBox.
-			  </div>
-			);
-		  }
-		});
-		React.render(
-		  <CommentBox />,
-		  document.getElementById('content')
-		);
-	</script>
-	
-	
-	
-	<script type="text/jsx">
-		var CommentList = React.createClass({
-		  render: function() {
-			return (
-			  <div className="commentList">
-				Hello, world! I am a CommentList.
-			  </div>
-			);
-		  }
-		});
-
-		var CommentForm = React.createClass({
-		  render: function() {
-			return (
-			  <div className="commentForm">
-				Hello, world! I am a CommentForm.
-			  </div>
-			);
-		  }
-		});
-	</script>
-	
-	
-	<script type="text/jsx">
-		var CommentBox = React.createClass({
-		  render: function() {
-			return (
-			  <div className="commentBox">
-				<h1>Comments</h1>
-				<CommentList />
-				<CommentForm />
-			  </div>
-			);
-		  }
-		});
-	</script>
-	
-	
-    <script src="/bower_components/react/react-with-addons.min.js"></script>
-    <script src="/bower_components/react/JSXTransformer.js"></script>
-    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>	
-  </body>
+    <head>
+        <title>PATI TESTUJE</title>
+    </head>
+    <body>
+        <h1 class="main" style="color:red;">Startujemy jeszcze nie ruszyłes okna</h1>
+		<h2 class="react-content"></h2>
+		<script type="text/jsx;harmony=true">
+			
+			// RESIZE OKNA
+			// RESIZE OKNA
+			// RESIZE OKNA
+			// RESIZE OKNA
+			window.addEventListener("resize", function() {
+				if(window.innerWidth > 700)
+				{
+					React.render(<span>Ruszyłeś okno i masz <b>WIĘCEJ</b> niż 700px</span>, document.querySelector('.main'))
+				}
+				else {
+					// SKŁADNIA (<co_wrzucić>,<gdzie_wrzucić>)
+					React.render(<span>Ruszyłeś okno i masz <b>MNIEJ</b> niż 700px</span>, document.querySelector('.main'));
+				}
+			});
+		
+		
+		
+			// TWORZENIE KOMPONENTU
+			// TWORZENIE KOMPONENTU
+			// TWORZENIE KOMPONENTU
+			// TWORZENIE KOMPONENTU
+			var Component_1 = React.createClass({
+				render: function() {
+					return (
+						<div clasName="component1">Jestem pierwszym[1] komponentem</div>
+					);
+				}
+			});
+			
+			var Component_2 = React.createClass({
+				render: function() {
+					return (
+						<div className="component2">Jestem drugim[2] komponentem</div>
+					);
+				}
+			});
+			
+			var Component_3 = React.createClass({
+				render: function() {
+					return (
+						<div className="component3">Jestem trzecim[3] komponentem</div>
+					);
+				}
+			})
+			
+			var Scalenie_Komponentow = React.createClass({
+				render: function() {
+					return (
+						<div className="wywolanie">
+							<Component_1 />
+							<Component_2 />
+							<Component_3 />
+						</div>
+					);
+				}
+			});
+			
+			
+			// WRZUCENIE DO HTML
+			// WRZUCENIE DO HTML
+			// WRZUCENIE DO HTML
+			// WRZUCENIE DO HTML
+			// SKŁADNIA (<co_wrzucić>,<gdzie_wrzucić>)
+			
+			React.render(<Scalenie_Komponentow />, document.querySelector('.react-content'));
+		
+		</script>
+		
+        <script src="/bower_components/react/react-with-addons.js"></script>
+        <script src="/bower_components/react/JSXTransformer.js"></script>
+    </body>
 </html>

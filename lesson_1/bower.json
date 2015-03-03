@@ -1,0 +1,7 @@
+{
+    "name": "workshop",
+    "dependencies": {
+	"react": "0.x",
+	"jquery": "2.x"
+    }
+}
