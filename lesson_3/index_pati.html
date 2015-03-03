@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LESSON 3 PATI</title>
+    </head>
+    <body>
+		<script type="text/jsx;harmony=true">
+			var ToDoList = React.createClass({
+				getInitialState: function() {
+					return {
+						"currentIndex": 0,
+						"todosArray": []
+					}
+				},
+				ADD: function(e) {
+					this.setState({
+						"currentIndex": this.state.currentIndex + 1,
+						"todosArray": this.state.todosArray.concat({"id": this.state.currentIndex + 1,"value": this.refs.myInput.getDOMNode().value})
+					});
+					e.preventDefault();
+				},
+				SAVE: function(e) {
+					var finalArray = this.state.todosArray.map(i => {
+						return <span>
+							{i.id} {i.value} 
+						</span>;
+					});
+					document.querySelector('.tu').innerHTML = finalArray;
+					
+					console.warn(finalArray);
+					e.preventDefault();
+				},
+				REMOVE: function(todos_ITEM, e) {
+					this.setState({
+						"todosArray": this.state.todosArray.filter(todoTEMP => todoTEMP.id !== todos_ITEM.id)
+					});
+					e.preventDefault();
+				},
+				render: function() {
+					var todosItems = this.state.todosArray.map(todos_ITEM => {
+						return <li>
+							<strong>id elementu:[{todos_ITEM.id}] </strong>
+							<span>{todos_ITEM.value} </span>
+							<button onClick={this.REMOVE.bind(this, todos_ITEM)}>usuń</button>
+						</li>;
+					});
+					return <div className="formWrapper">
+						<input type="text" ref="myInput" />
+						<button onClick={this.ADD}>ADD</button>
+						<button onClick={this.SAVE}>SAVE</button>
+						<ul>
+							{todosItems}
+						</ul>
+						<div className="wynik">
+							Wynik real time: {this.state.todosArray}
+						</div>
+						<div className="wynikPoKliku">
+							Wynik po kliku: <span className="tu"></span>
+						</div>
+					</div>
+				}
+			});
+			
+			React.render(<ToDoList />, document.body);
+		</script>
+
+        <script src="/bower_components/react/react-with-addons.js"></script>
+        <script src="/bower_components/react/JSXTransformer.js"></script>
+    </body>
+</html>

@@ -8,8 +8,9 @@
             var MyList = React.createClass({
 				getInitialState: function() {
 				  return {
-				  "currentIndex": 0,
-				  "todos": []};
+					  "currentIndex": 0,
+					  "todos": []
+				  };
 			    },
                 "onAddTodoListItem": function (evt) {
                     evt.preventDefault();
@@ -32,10 +33,11 @@
 				},
                 "render": function () {
 					var todosItems = this.state.todos.map(todo => {
-                                return <li>{todo.value}
-								<button onClick={this.onRemoveTodo.bind(this, todo)}>X</button>
-								</li>;
-                            });
+						return <li>
+							{todo.value}
+							<button onClick={this.onRemoveTodo.bind(this, todo)}>X</button>
+						</li>;
+                    });
                     return <div>
                         <input ref="myinput" type="text" />
                         <button onClick={this.onAddTodoListItem}>Click me!</button>
