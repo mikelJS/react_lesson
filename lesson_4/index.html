@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LESSON 4 PATI</title>
+        <style>
+        	body {font-family: arial;}
+			
+        </style>
+    </head>
+    <body>
+    	<h1>TEST</h1>
+    	<script type="text/jsx;harmony=true">
+    		// API - https://randomuser.me/documentation
+
+    		var UserCard = React.createClass({
+    			"getInitialState": function() {
+    				return {
+    					"usersArray": [
+    						{
+    							"user":{}
+    						}
+    					]
+    				}
+    			},
+    			"componentWillMount": function() {
+    				fetch('http://api.randomuser.me?results=10') //wysyła ajaksowego rikłesta i dostaje odpowiedź
+						.then(response => response.json()) 
+						.then(jsonResponse => {
+							this.setState({
+								"usersArray": jsonResponse.results,
+								//"name": jsonResponse.results[0].user.name.first
+								//"user": jsonResponse.results[0].user
+							})
+						});
+    			},
+    			"render": function() {
+    				//console.log(this.state.user);
+    				var userItem = this.state.usersArray.map(i => {
+    					return <div>
+    						{i.user.name}
+    					</div>;
+    				})
+    				return <div>
+    					{userItem}
+    				</div>
+    			}
+    		});     
+    		React.render(<UserCard />, document.body);
+    	</script>
+
+		<script src="/bower_components/fetch/fetch.js"></script>
+        <script src="/bower_components/react/react-with-addons.js"></script>
+        <script src="/bower_components/react/JSXTransformer.js"></script>
+    </body>
+</html>

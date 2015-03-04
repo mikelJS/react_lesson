@@ -1,0 +1,8 @@
+{
+    "name": "workshop",
+    "dependencies": {
+	    "fetch": "0.x",
+		"react": "0.x",
+		"jquery": "2.x"
+    }
+}
