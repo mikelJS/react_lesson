@@ -21,30 +21,27 @@
 				},
 				SAVE: function(e) {
 					var finalArray = this.state.todosArray.map(i => {
-						return <span>
-							{i.id} {i.value} 
-						</span>;
+						return i.id + i.value;
 					});
-					document.querySelector('.tu').innerHTML = finalArray;
+					document.querySelector('.tu').innerHTML = finalArray.join(" | ");
 					
-					console.warn(finalArray);
 					e.preventDefault();
 				},
 				REMOVE: function(todos_ITEM, e) {
-					this.setState({
-						"todosArray": this.state.todosArray.filter(todoTEMP => todoTEMP.id !== todos_ITEM.id)
+					this.setState({						 //.filter(PRZEKAZUJE ZWYKŁĄ FUNKCJĘ | JEŚLI JEST W JEDNEJ LINIJCE TO NIE MUSI BYĆ {return} tylko sama treść)	 					 
+						"todosArray": this.state.todosArray.filter(todoTEMP => {return todoTEMP.id !== todos_ITEM.id})
 					});
 					e.preventDefault();
 				},
-				render: function() {
+				render: function() {                    //.map(TO SAMO CO WYŻEJ)
 					var todosItems = this.state.todosArray.map(todos_ITEM => {
 						return <li>
 							<strong>id elementu:[{todos_ITEM.id}] </strong>
 							<span>{todos_ITEM.value} </span>
 							<button onClick={this.REMOVE.bind(this, todos_ITEM)}>usuń</button>
 						</li>;
-					});
-					return <div className="formWrapper">
+					});//dlaczego czasem jest nawias po return() a czasem nie. Co to wnosi?
+					return (<div className="formWrapper">  
 						<input type="text" ref="myInput" />
 						<button onClick={this.ADD}>ADD</button>
 						<button onClick={this.SAVE}>SAVE</button>
@@ -57,7 +54,7 @@
 						<div className="wynikPoKliku">
 							Wynik po kliku: <span className="tu"></span>
 						</div>
-					</div>
+					</div>)
 				}
 			});
 			
