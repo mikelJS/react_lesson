@@ -1,8 +1,7 @@
 {
-    "name": "workshop",
+    "name": "getrandomuser",
     "dependencies": {
-	    "fetch": "0.x",
-		"react": "0.x",
-		"jquery": "2.x"
+        "fetch": "0.x",
+        "react": "0.x"
     }
 }

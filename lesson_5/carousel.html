@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <script type="text/jsx;harmony=true">
+            var Carousel = React.createClass({
+				"getInitialState": function() {
+				  return {"Images":[{
+					"Image": "http://lorempixel.com/200/200/sports/1"
+				  },
+				  {
+					"Image": "http://lorempixel.com/200/200/sports/2"
+				  },
+				  {
+					"Image": "http://lorempixel.com/200/200/sports/3"
+				  }],
+				  "CurrentImage": {
+					"Image": "http://lorempixel.com/200/200/sports/1"
+				  },
+				  "CurrentIndex": 0
+				  };
+			    },
+				"onButtonClick": function(direction, evt){
+					evt.preventDefault();
+					var index = this.state.CurrentIndex;
+					if(direction === "prev"){
+						index = index - 1 < 0 ? this.state.Images.length - 1: index - 1;
+					}
+					else {
+						index = index + 1 >= this.state.Images.length ? 0 : index + 1;
+					}
+					
+					this.setState({
+						"CurrentIndex": index,
+						"CurrentImage": this.state.Images[index]
+					});
+				},
+                "render": function () {
+                    return <div>
+                        <button onClick={this.onButtonClick.bind(this,"prev")}>prev</button>
+						<div>
+							<img src={this.state.CurrentImage.Image} alt="alt" />
+						</div>
+						<button onClick={this.onButtonClick.bind(this,"next")}>next</button>
+                    </div>;
+                }
+            });
+            React.render(<Carousel />, document.body);
+        </script>
+
+        <script src="/bower_components/react/react-with-addons.js"></script>
+        <script src="/bower_components/react/JSXTransformer.js"></script>
+    </body>
+</html>

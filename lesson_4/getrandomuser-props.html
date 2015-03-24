@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <script type="text/jsx;harmony=true">
+            var UserCard = React.createClass({
+                "render": function () {
+                    return <div>
+                        <div>{this.props.name}</div>
+                        <div>{this.props.surname}</div>
+                    </div>;
+                }
+            });
+
+            fetch("http://api.randomuser.me/")
+                .then(response => response.json())
+                .then(jsonResponse => {
+                    // render element after data is fetched
+                    React.render(<UserCard
+                        name={jsonResponse.results[0].user.name.first}
+                        surname={jsonResponse.results[0].user.name.last}
+                    ></UserCard>, document.body);
+                });
+        </script>
+
+        <script src="/bower_components/fetch/fetch.js"></script>
+        <script src="/bower_components/react/react-with-addons.js"></script>
+        <script src="/bower_components/react/JSXTransformer.js"></script>
+    </body>
+</html>

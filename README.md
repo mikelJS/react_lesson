@@ -4,5 +4,5 @@
 <li>lesson_2: Tworzenie i osadzanie komponentu</li>
 <li>lesson_3: Tworzenie TODO listy</li>
 <li>lesson_4: Łączenie się z randomuser.me. Pobieranie danych(json) za pomocą "fetch"a</li>
-
+<li>lesson_5: Prosty slajder</li>
 </ul>

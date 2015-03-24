@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <script type="text/jsx;harmony=true">
+            var UserCard = React.createClass({
+                "getInitialState": function () {
+                    // initial state after component render
+                    return {
+                        "name": this.props.name,
+                        "surname": this.props.surname,
+                        "photo": "",
+                        "street": "",
+                        "city": "",
+                        "region": "",
+                        "gender": ""
+                    };
+                },
+                "componentWillMount": function () {
+                    fetch("http://api.randomuser.me/")
+                        .then(response => response.json())
+                        .then(jsonResponse => {
+                            this.setState({
+                                // replace component state wih remote data
+                                "name": jsonResponse.results[0].user.name.first,
+                                "surname": jsonResponse.results[0].user.name.last,
+                                "photo": jsonResponse.results[0].user.picture.thumbnail,
+                                "street": jsonResponse.results[0].user.location.street,
+                                "city": jsonResponse.results[0].user.location.city,
+                                "region": jsonResponse.results[0].user.location.state,
+                                "gender": jsonResponse.results[0].user.gender
+                            })
+                        });
+                },
+
+                "render": function () {
+                    var _this = this;
+                    var getBackground = () => {
+                        if (this.state.gender == "male") {
+                            return "lightblue";
+                        } else if (this.state.gender == "female") {
+                            return "yellow";
+                        } else return "white"
+                    };
+                    var cardStyle = {
+                        display: "inline-block",
+                        padding: "10",
+                        border: "1px solid #000",
+                        minWidth: "220",
+                        backgroundColor: getBackground()
+                    };
+                    var photoStyle = {
+                        float: "left",
+                        marginRight: "10"
+                    };
+
+                    var nameStyle = {
+                        display: "block",
+                        textTransform: "capitalize",
+                        fontWeight: "bold",
+                        whiteSpace: "nowrap"
+                    };
+
+                    var spanStyle = {
+                        display: "block"
+                    }
+                    return <p style={cardStyle} className="h-card">
+                            <img style={photoStyle} className="u-photo" src={this.state.photo} alt="" />
+                            <span style={nameStyle} className="p-name">{this.state.name} {this.state.surname}</span>
+                            <span style={spanStyle} className="p-street-address">{this.state.street}</span>
+                            <span style={spanStyle} className="p-locality">{this.state.city}</span>
+                            <span style={spanStyle} className="p-region">{this.state.region} {this.state.getGender}</span>
+                        </p>
+                }
+            });
+
+            React.render(<UserCard name="Pierre" surname="Dolaine" />, document.body);
+        </script>
+
+        <script src="/bower_components/fetch/fetch.js"></script>
+        <script src="/bower_components/react/react-with-addons.js"></script>
+        <script src="/bower_components/react/JSXTransformer.js"></script>
+    </body>
+</html>
